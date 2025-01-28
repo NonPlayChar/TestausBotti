@@ -2,8 +2,9 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { Client, Collection, GatewayIntentBits } = require('discord.js');
 const { token } = require('../config.json');
+const sqlite3 = require('sqlite3').verbose();
 
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
 
 
 client.commands = new Collection();
@@ -39,6 +40,14 @@ for (const file of eventFiles) {
 	}
 }
 
+
+
+const db = new sqlite3.Database('./database.db', (err) => {
+    if (err) {
+        console.error(err.message);
+    }
+    console.log('Connected to the database.');
+});
 
 
 client.login(token);
