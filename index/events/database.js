@@ -9,29 +9,12 @@ const db = new sqlite3.Database('messages.db', (err) => {
   }
 });
 
-// Create the messages table if it doesn't exist
-db.run(
-  `CREATE TABLE IF NOT EXISTS messages (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      content TEXT,
-      author_id TEXT,
-      guild_id TEXT,
-      channel_id TEXT,
-      timestamp TEXT
-    )`,
-  (err) => {
-    if (err) {
-      console.error('Error creating table:', err.message);
-    }
-  }
-);
 
-// Function to insert a message into the database
-function saveMessage(content, authorId, guildId, channelId) {
+function saveMessage(authorId, guildId, channelId) {
   const timestamp = new Date(); // Current timestamp
   db.run(
-    `INSERT INTO messages (content, author_id, guild_id, channel_id, timestamp) VALUES (?, ?, ?, ?, ?)`,
-    [content, authorId, guildId, channelId, timestamp],
+    `INSERT INTO messages (author_id, guild_id, channel_id, timestamp) VALUES (?, ?, ?, ?)`,
+    [authorId, guildId, channelId, timestamp],
     function (err) {
       if (err) {
         console.error('Error inserting message:', err.message);

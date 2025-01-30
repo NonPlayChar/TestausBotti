@@ -1,6 +1,6 @@
 const fs = require('node:fs');
 const path = require('node:path');
-const { Events, Client, Collection, GatewayIntentBits } = require('discord.js');
+const { Client, Collection, GatewayIntentBits } = require('discord.js');
 const { token } = require('../config.json');
 const sqlite3 = require('sqlite3').verbose();
 
@@ -49,3 +49,5 @@ for (const file of eventFiles) {
 
 
 client.login(token);
+
+client.on
