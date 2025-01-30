@@ -1,4 +1,4 @@
-const { Events, MessageFlags, time } = require('discord.js');
+const { Events, MessageFlags } = require('discord.js');
 const date = new Date();
 
 module.exports = {
