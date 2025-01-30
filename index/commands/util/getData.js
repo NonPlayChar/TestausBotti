@@ -22,7 +22,7 @@ module.exports = {
         if (interaction.options.getSubcommand() === 'topchannel') {
             const guildId = interaction.options.getString('guildid');
 
-            await interaction.reply(`Getting data from guild...`);
+            await interaction.reply({content: `Getting data from guild...`, flags: MessageFlags.Ephemeral });
         
             
             db.all(
@@ -46,7 +46,7 @@ module.exports = {
         if (interaction.options.getSubcommand() === 'topuser') {
             const guildId = interaction.options.getString('guildid');
 
-            await interaction.reply(`Getting data from guild...`);
+            await interaction.reply({content: `Getting data from guild...`, flags: MessageFlags.Ephemeral });
         
             
             db.all(
