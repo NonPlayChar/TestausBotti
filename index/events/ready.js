@@ -1,5 +1,5 @@
 const { Events, ActivityType } = require('discord.js');
-const { db } = require('./database');
+const { connect } = require('../mariadb.js');
 
 
 module.exports = {
@@ -13,23 +13,7 @@ module.exports = {
 		  });
 		
 		try{
-			db.run(
-				`CREATE TABLE IF NOT EXISTS messages (
-					id INTEGER PRIMARY KEY AUTOINCREMENT,
-					author_id TEXT,
-					guild_id TEXT,
-					channel_id TEXT,
-					timestamp TEXT
-				  )`,
-				(err) => {
-				  if (err) {
-					console.error('Error creating table:', err.message);
-				  }
-				}
-			);
-			
-			
-
+			await connect();
 			console.log(`Ready! Logged in as ${client.user.tag}`);
 	}
 		catch (error) {
