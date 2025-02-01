@@ -1,7 +1,6 @@
 const { SlashCommandBuilder, AttachmentBuilder } = require('discord.js');
 const { getConnection } = require('../../mariadb.js');
 const { EmbedBuilder } = require('discord.js');
-const { file } = require('../../index.js');
 
 
 
@@ -29,6 +28,7 @@ module.exports = {
 		const subcommand = interaction.options.getSubcommand();
 		const connection = getConnection();
 		await interaction.reply(`Fetching data for ${subcommand}...`);
+		const file = new AttachmentBuilder('maomao.png', { name: 'pfp' });
 		if (subcommand === 'leaderboard')  {
 			if (interaction.options.getString('timeframe') === 'alltime') {
 				const data = await connection.query("SELECT userid, SUM(message_count) AS total_messages FROM messages_day_stat GROUP BY userid ORDER BY total_messages DESC LIMIT 5");
@@ -44,7 +44,7 @@ module.exports = {
 						{ name: 'Sijalla 5.', value: `${data[4].userid}, ${data[4].total_messages} viestiä` },
 					)
 					.setTimestamp()
-					.setFooter({ text: 'Testausbotti', iconURL: 'attachment://maomao.png' });
+					.setFooter({ text: 'Testausbotti', iconURL: 'attachment://pfp' });
 				await interaction.editReply({ embeds: [embed], files: [file] });}
 			
 			else if (interaction.options.getString('timeframe') === 'yesterday') {
