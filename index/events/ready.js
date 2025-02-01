@@ -1,4 +1,4 @@
-const { Events, ActivityType } = require('discord.js');
+const { Events, ActivityType, AttachmentBuilder } = require('discord.js');
 const { connect } = require('../mariadb.js');
 
 
