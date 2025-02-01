@@ -41,8 +41,6 @@ for (const file of eventFiles) {
 	}
 }
 
-const file = new AttachmentBuilder('maomao.png', { name: 'maomao.png' });
-
 
 client.login(token);
 
